@@ -1,6 +1,7 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
 import { formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
+import env from '@libs/env';
 import axios from 'axios';
 import { ethers } from 'ethers';
 
@@ -10,7 +11,7 @@ const stakerAbi = [
   {"inputs":[{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"name":"itemStatuses","outputs":[{"internalType":"uint256","name":"stakedPool","type":"uint256"},{"internalType":"uint256","name":"stakedAt","type":"uint256"},{"internalType":"uint256","name":"tokenClaimed","type":"uint256"}],"stateMutability":"view","type":"function"}
 ];
 
-const provider = new ethers.providers.JsonRpcProvider("https://mainnet.infura.io/v3/f6221adcac0d4db0b50fbc0f6d72259f");
+const provider = new ethers.providers.JsonRpcProvider(env.WEB3_URL);
 const contract = new ethers.Contract(stakerAddress, stakerAbi, provider);
 
 const poolLookup = {
@@ -21,7 +22,7 @@ const poolLookup = {
   "4": "90 Days",
 }
 
-const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+const metadata: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   const { tokenId } = event.pathParameters;
   const url = `https://impostors-meta.s3.amazonaws.com/${tokenId}`;
   const [metadata, itemStatus] = await Promise.all([
@@ -46,4 +47,4 @@ const hello: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) =
   return formatJSONResponse(metadata);
 }
 
-export const main = middyfy(hello);
+export const main = middyfy(metadata);
