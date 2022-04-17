@@ -5,6 +5,6 @@ NFT metadata API for Imposters Aliens that merges staking status (obtained from 
 2. `yarn start` # Run locally
 3. `yarn deploy` # Deploy to AWS
 
-Currently deployed to https://u6q8vhm634.execute-api.us-east-1.amazonaws.com/dev/impostors/metadata
+Currently deployed to https://2qmlajcprh.execute-api.us-east-1.amazonaws.com/prod/impostors/metadata/
 
-Append your token ID to the URL e.g. https://u6q8vhm634.execute-api.us-east-1.amazonaws.com/dev/impostors/metadata/10000
+Append your token ID to the URL e.g. https://2qmlajcprh.execute-api.us-east-1.amazonaws.com/prod/impostors/metadata/10000

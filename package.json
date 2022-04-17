@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "sls offline",
-    "deploy": "dotenv sls deploy"
+    "deploy": "dotenv -- sls deploy",
+    "deploy:prod": "dotenv -- sls deploy --stage prod"
   },
   "engines": {
     "node": ">=14.15.0"
